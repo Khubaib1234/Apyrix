@@ -20,7 +20,15 @@
 }
 
 body {
-  background: var(--background);
+  background: #020c1e;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html {
+  background: #020c1e;
+  overflow-x: hidden;
 }

@@ -7,7 +7,8 @@
     radial-gradient(ellipse 60% 40% at 80% 60%, rgba(167, 139, 250, 0.10) 0%, transparent 60%),
     linear-gradient(180deg, #020c1e 0%, #040f28 30%, #071a3e 60%, #0c2754 100%);
   font-family: "Segoe UI", sans-serif;
-  overflow: hidden;
+  /* Removed overflow: hidden — it was clipping the mobile dropdown menu */
+  overflow-x: clip;
 }
 
 /* Subtle mesh grid overlay */
@@ -131,6 +132,20 @@
   padding: 0.4rem 1.2rem;
   border-radius: 999px;
   backdrop-filter: blur(8px);
+}
+
+/* "Apyrix LLC" brand label above the eyebrow */
+.hero-brand-label {
+  display: block;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 55%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: -0.4rem;
 }
 
 /* Main headline */
@@ -436,15 +451,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 4rem;
+  padding: 1.5rem 2rem;
   top: 1rem;
   z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Logo left side */
+/* Logo pinned to left */
 .logo-container {
   position: absolute;
-  left: 4rem;
+  left: 2rem;
+  flex-shrink: 0;
 }
 
 .logo {
@@ -452,17 +470,25 @@
 }
 
 .logo-title {
-  font-size: 4.5rem;
-  font-weight: 700;
-  line-height: 1;
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  padding-bottom: 0.15em;
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 60%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .logo-subtitle {
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
-  border-top: 1px solid white;
-  margin-top: 0.3rem;
-  padding-top: 0.3rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0.15rem;
+  padding-top: 0.15rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* ================= HAMBURGER ================= */
@@ -476,10 +502,7 @@
   cursor: pointer;
   padding: 8px;
   border-radius: 8px;
-  position: absolute;
-  right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
+  flex-shrink: 0;
   z-index: 200;
 }
 
@@ -616,15 +639,6 @@
 }
 
 @media (max-width: 1100px) {
-  .navbar {
-    justify-content: flex-start;
-    padding: 2rem 2rem;
-  }
-
-  .logo-container {
-    position: static;
-  }
-
   .desktop-nav {
     gap: 2.5rem;
   }
@@ -638,22 +652,40 @@
   .desktop-nav {
     display: none;
   }
+
+  .navbar {
+    padding: 1rem 1.25rem;
+  }
+
+  .logo-title {
+    font-size: 2rem;
+  }
+
+  .logo-container {
+    left: 1.25rem;
+  }
+
+  .hamburger-btn {
+    position: absolute;
+    right: 1.25rem;
+  }
 }
 
 /* ── Mobile dropdown panel (appears below hamburger) ── */
 .mobile-menu-panel {
-  position: absolute;
-  top: calc(100% - 0.5rem);
+  position: fixed;
+  top: 5rem;
   right: 1rem;
   background: rgba(5, 14, 34, 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  min-width: 230px;
+  min-width: 240px;
+  max-width: calc(100vw - 2rem);
   padding: 0.6rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
-  z-index: 500;
+  z-index: 9999;
   overflow: hidden;
 }
 
